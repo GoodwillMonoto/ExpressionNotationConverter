@@ -15,7 +15,12 @@ to build the project, then
 
 # Design Decisions
 
-Created the Coverter a class library making it easer to use in other project.
+Created the Converter as a class library making it easier to use in other projects.
+
+Created a Parser class PostfixToInfixParser with base class with base Parser thus allowing for extension by  adding other parsers without having to modify existing parser classes.
+
+
+
 
 # Testing
 
@@ -29,5 +34,5 @@ I would ensure input validation done and security tests are conducted as well.
 
 I would also ensure to include tests that evaluate performance
 
-I would conduct these tests with a test library such as xunit.
+I would conduct these tests with a test framework such as xunit.
 
