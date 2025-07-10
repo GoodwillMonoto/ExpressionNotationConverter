@@ -30,8 +30,6 @@ namespace MathNotationParser
                     if ((rightPrecedence < mathOperator.Precedence || (rightPrecedence == mathOperator.Precedence)))
                         rightExpression.Mathexpression = '(' + rightExpression.Mathexpression + ')';
 
-
-                    //
                     expressionStack.Push(new Expression(leftExpression.Mathexpression,rightExpression.Mathexpression,mathOperator));
                 }
                 else
@@ -45,7 +43,9 @@ namespace MathNotationParser
 
         public string ToInfix(string rpnstring)
         {
+
             return Parse(rpnstring);
         }
     }
+
 }
