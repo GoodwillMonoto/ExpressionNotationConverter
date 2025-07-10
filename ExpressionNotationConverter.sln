@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35707.178 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpressionNotationConverter", "ExpressionNotationConverter\ExpressionNotationConverter.csproj", "{64DB2024-C9AC-4061-899C-09D8063A6E98}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathNotationParser", "NotationParser\MathNotationParser.csproj", "{DD3CCF7D-6A02-480F-8CC1-4DD1D867DCA2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{64DB2024-C9AC-4061-899C-09D8063A6E98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64DB2024-C9AC-4061-899C-09D8063A6E98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64DB2024-C9AC-4061-899C-09D8063A6E98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64DB2024-C9AC-4061-899C-09D8063A6E98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD3CCF7D-6A02-480F-8CC1-4DD1D867DCA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD3CCF7D-6A02-480F-8CC1-4DD1D867DCA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD3CCF7D-6A02-480F-8CC1-4DD1D867DCA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD3CCF7D-6A02-480F-8CC1-4DD1D867DCA2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
