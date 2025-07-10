@@ -1,6 +1,6 @@
 # Getting Started with C# ExpressionNotationConverter
 
-
+### `' Dotnet cli required'`
 ### ` Navigate to  folder  named 'ExpressionNotationConverter'`
 
 ## Available Scripts
