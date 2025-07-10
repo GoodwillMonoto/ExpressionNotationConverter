@@ -1,7 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using MathNotationParser;
-RpnToInfixParser parser = new RpnToInfixParser();
+PostfixToInfixParser parser = new PostfixToInfixParser();
 Console.WriteLine("This is a simple console application to convert expression notations:");
 Console.WriteLine("It supports postfix to infix notatation");
 Console.WriteLine("Please ensure you have atleast one charater of space between numbers an oporators");
