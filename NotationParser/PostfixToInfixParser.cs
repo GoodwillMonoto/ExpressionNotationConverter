@@ -27,6 +27,9 @@ namespace MathNotationParser
                     int leftPrecedence = leftExpression.MathOperator != null  ? leftExpression.MathOperator.Precedence : 10 ;
                     int rightPrecedence = rightExpression.MathOperator != null ? rightExpression.MathOperator.Precedence : 10;
 
+                    if ((leftPrecedence < mathOperator.Precedence || (leftPrecedence == mathOperator.Precedence)))
+                        leftExpression.Mathexpression = '(' + leftExpression.Mathexpression + ')';
+
                     if ((rightPrecedence < mathOperator.Precedence || (rightPrecedence == mathOperator.Precedence)))
                         rightExpression.Mathexpression = '(' + rightExpression.Mathexpression + ')';
 
