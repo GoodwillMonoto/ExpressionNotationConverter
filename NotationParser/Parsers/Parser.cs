@@ -1,10 +1,11 @@
-﻿using System;
+﻿using MathNotationParser.Evaluators;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MathNotationParser.NotationParsers
+namespace MathNotationParser.Parsers
 {
     public abstract class Parser
     {
@@ -16,6 +17,6 @@ namespace MathNotationParser.NotationParsers
             { '*', new MathOperator('*', 3) }
         };
 
-        protected abstract string Parse(string input);
+        protected abstract void Parse(string input);
     }
 }

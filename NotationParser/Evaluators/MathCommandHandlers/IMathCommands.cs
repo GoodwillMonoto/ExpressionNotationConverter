@@ -5,7 +5,7 @@ using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MathNotationParser.MathCommands
+namespace MathNotationParser.Evaluators.MathCommandHandlers
 {
     public interface IMathCommandHandler
     {

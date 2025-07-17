@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MathNotationParser.Evaluators.MathCommandHandlers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,14 +31,31 @@ namespace MathNotationParser.Evaluators
         {
             while (ExpressionContainsOperators())
             {
+                var currentOperator = operators
+                    .Where(op => Expression.Contains(op.Key))
+                    .OrderByDescending(op => op.Value.Precedence)
+                    .FirstOrDefault();
 
-                //handle brackets
-
-                // then handle Division, Multiplication, Addition, Subtraction
-
-
-
-                return 0;
+                switch (currentOperator.Key)
+                {
+                    case '(':
+                        HandleBrackets();
+                        break;
+                    case '/':
+                        HandleDivision();
+                        break;
+                    case '*':
+                        HandleMultiplication();
+                        break;
+                    case '+':
+                        HandleAddition();
+                        break;
+                    case '-':
+                        HandleSubtraction();
+                        break;
+                    default:
+                        throw new InvalidOperationException("Unknown operator in expression.");
+                }
             }
 
             return Result;
@@ -57,8 +75,7 @@ namespace MathNotationParser.Evaluators
 
         private void HandleBrackets()
         {
-            // Logic to handle brackets in the expression
-            // This will involve finding the innermost brackets and evaluating them first
+          var bracketHandler = new BracketHandlerCommand(expression: Expression);
         }
 
         private void HandleDivision()

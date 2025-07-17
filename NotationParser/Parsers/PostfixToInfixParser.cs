@@ -1,5 +1,6 @@
 ﻿using MathNotationParser.Evaluators;
 using MathNotationParser.NotationExpressions;
+using MathNotationParser.Parsers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,12 +11,15 @@ namespace MathNotationParser.NotationParsers
 {
     public class PostfixToInfixParser : Parser
     {
-        public INotationEvaluator notationEvaluator { get; set; }
-        public string evaluationString { get; set; }
-        protected override string Parse(string rpnstring)
+        protected INotationEvaluator notationEvaluator { get; set; }
+        public string EvaluationString;
+        public string Input;
+        public string Output;
+        protected override void Parse(string rpnstring)
         {
+            Input = rpnstring;
             var expressParseList = rpnstring.Split(' ');
-            var expressionStack = new Stack<InfixExpression>();
+            var expressionStack = new Stack<InfixExpressionBuilder>();
 
             foreach (var parseItem in expressParseList)
             {
@@ -37,26 +41,25 @@ namespace MathNotationParser.NotationParsers
                     if (rightPrecedence < mathOperator.Precedence || rightPrecedence == mathOperator.Precedence)
                         rightExpression.Mathexpression = '(' + rightExpression.Mathexpression + ')';
 
-                    expressionStack.Push(new InfixExpression(leftExpression.Mathexpression, rightExpression.Mathexpression, mathOperator));
+                    expressionStack.Push(new InfixExpressionBuilder(leftExpression.Mathexpression, mathOperator, rightExpression.Mathexpression));
                 }
                 else
                 {
-                    expressionStack.Push(new InfixExpression(parseItem));
+                    expressionStack.Push(new InfixExpressionBuilder(parseItem));
                 }
             }
 
-            return expressionStack.Peek().Mathexpression;
+            Output = expressionStack.Peek().Mathexpression;
         }
 
         public string ToInfix(string rpnstring)
         {
-
-            return Parse(rpnstring);
+            return Output;
         }
 
         public double Evaluate()
         {
-            notationEvaluator = new InfixEvaluator(evaluationString);
+            notationEvaluator = new InfixEvaluator(EvaluationString);
             return notationEvaluator.Evaluate();
         }
     }

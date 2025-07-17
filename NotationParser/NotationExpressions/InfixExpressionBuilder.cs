@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace MathNotationParser.NotationExpressions
 {
-    public class InfixExpression
+    public class InfixExpressionBuilder
     {
         public string Mathexpression;
         public MathOperator MathOperator;
 
-        public InfixExpression(string expression)
+        public InfixExpressionBuilder(string expression)
         {
             Mathexpression = expression;
         }
 
-        public InfixExpression(string leftExpression, string rightExpression, MathOperator mathOperator)
+        public InfixExpressionBuilder(string leftExpression, MathOperator mathOperator, string rightExpression)
         {
             Mathexpression = $"{leftExpression} {mathOperator.OperatorToken} {rightExpression}";
             MathOperator = mathOperator;

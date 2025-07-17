@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MathNotationParser.MathCommands
+namespace MathNotationParser.Evaluators.MathCommandHandlers
 {
-    public class AdditionHandlerCommand : IMathCommandHandler
+    public class MultiplicationHandlerCommand : IMathCommandHandler
     {
         public double value;
 
