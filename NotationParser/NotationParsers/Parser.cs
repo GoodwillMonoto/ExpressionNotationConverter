@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MathNotationParser
+namespace MathNotationParser.NotationParsers
 {
-    public abstract class Parser 
+    public abstract class Parser
     {
-        protected  IReadOnlyDictionary<char, MathOperator> operators = new Dictionary<char, MathOperator>
+        protected IReadOnlyDictionary<char, MathOperator> operators = new Dictionary<char, MathOperator>
         {
             { '+', new MathOperator('+', 2) },
             { '-', new MathOperator('-', 2) },

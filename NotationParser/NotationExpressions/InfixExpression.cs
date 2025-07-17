@@ -4,19 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MathNotationParser
+namespace MathNotationParser.NotationExpressions
 {
-    public class Expression
+    public class InfixExpression
     {
         public string Mathexpression;
         public MathOperator MathOperator;
 
-        public Expression(String expression)
+        public InfixExpression(string expression)
         {
             Mathexpression = expression;
         }
 
-        public Expression(String leftExpression, String rightExpression, MathOperator mathOperator)
+        public InfixExpression(string leftExpression, string rightExpression, MathOperator mathOperator)
         {
             Mathexpression = $"{leftExpression} {mathOperator.OperatorToken} {rightExpression}";
             MathOperator = mathOperator;

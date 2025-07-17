@@ -1,17 +1,21 @@
-﻿using System;
+﻿using MathNotationParser.Evaluators;
+using MathNotationParser.NotationExpressions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MathNotationParser
+namespace MathNotationParser.NotationParsers
 {
     public class PostfixToInfixParser : Parser
     {
+        public INotationEvaluator notationEvaluator { get; set; }
+        public string evaluationString { get; set; }
         protected override string Parse(string rpnstring)
         {
             var expressParseList = rpnstring.Split(' ');
-            var expressionStack = new Stack<Expression>();
+            var expressionStack = new Stack<InfixExpression>();
 
             foreach (var parseItem in expressParseList)
             {
@@ -24,30 +28,36 @@ namespace MathNotationParser
 
 
                     // Check precedence and add parentheses if necessary
-                    int leftPrecedence = leftExpression.MathOperator != null  ? leftExpression.MathOperator.Precedence : 10 ;
+                    int leftPrecedence = leftExpression.MathOperator != null ? leftExpression.MathOperator.Precedence : 10;
                     int rightPrecedence = rightExpression.MathOperator != null ? rightExpression.MathOperator.Precedence : 10;
 
-                    if ((leftPrecedence < mathOperator.Precedence || (leftPrecedence == mathOperator.Precedence)))
+                    if (leftPrecedence < mathOperator.Precedence || leftPrecedence == mathOperator.Precedence)
                         leftExpression.Mathexpression = '(' + leftExpression.Mathexpression + ')';
 
-                    if ((rightPrecedence < mathOperator.Precedence || (rightPrecedence == mathOperator.Precedence)))
+                    if (rightPrecedence < mathOperator.Precedence || rightPrecedence == mathOperator.Precedence)
                         rightExpression.Mathexpression = '(' + rightExpression.Mathexpression + ')';
 
-                    expressionStack.Push(new Expression(leftExpression.Mathexpression,rightExpression.Mathexpression,mathOperator));
+                    expressionStack.Push(new InfixExpression(leftExpression.Mathexpression, rightExpression.Mathexpression, mathOperator));
                 }
                 else
                 {
-                    expressionStack.Push(new Expression(parseItem));
+                    expressionStack.Push(new InfixExpression(parseItem));
                 }
             }
-         
-           return expressionStack.Peek().Mathexpression;
+
+            return expressionStack.Peek().Mathexpression;
         }
 
         public string ToInfix(string rpnstring)
         {
 
             return Parse(rpnstring);
+        }
+
+        public double Evaluate()
+        {
+            notationEvaluator = new InfixEvaluator(evaluationString);
+            return notationEvaluator.Evaluate();
         }
     }
 
