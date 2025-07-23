@@ -1,10 +1,10 @@
 ﻿namespace MathNotationParser.Interpreters
 {
-    public class MutliplicationExpression : IMathExpresion
+    public class MultiplicationExpression : IMathExpresion
     {
         private IMathExpresion Left;
         private IMathExpresion Right;
-        public MutliplicationExpression(IMathExpresion left, IMathExpresion right)
+        public MultiplicationExpression(IMathExpresion left, IMathExpresion right)
         {
             Left = left;
             Right = right;
