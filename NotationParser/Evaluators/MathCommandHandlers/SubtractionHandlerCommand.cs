@@ -16,6 +16,8 @@ namespace MathNotationParser.Evaluators.MathCommandHandlers
         private string InnerExpression;
 
         public string ExpressionToReplace;
+        public int ReplacemenStarttIndex;
+        public int ReplacementEndIndex;
 
         public SubtractionHandlerCommand(string expression)
         {
@@ -24,7 +26,20 @@ namespace MathNotationParser.Evaluators.MathCommandHandlers
 
         public void Handle()
         {
-            InnerExpression = Expression;
+            int additionOperatorIndex = Expression.IndexOf('+');
+            int leftNumberEndIndex = Expression.LastIndexOf(' ', additionOperatorIndex - 1);
+            int rightNumberStartIndex = Expression.IndexOf(' ', additionOperatorIndex + 1);
+
+            if (leftNumberEndIndex == -1)
+            {
+                leftNumberEndIndex = 0; // Start from the beginning if no space found
+            }
+
+            ReplacemenStarttIndex = leftNumberEndIndex;
+            ReplacementEndIndex = rightNumberStartIndex == -1 ? Expression.Length : rightNumberStartIndex;
+
+            InnerExpression = Expression.Substring(ReplacemenStarttIndex, ReplacementEndIndex - ReplacemenStarttIndex).Trim();
+
             Evaluate();
         }
 

@@ -17,6 +17,8 @@ namespace MathNotationParser.Evaluators.MathCommandHandlers
         private string InnerExpression;
 
         public string ExpressionToReplace;
+        public int ReplacementStartIndex;
+        public int ReplacementEndIndex;
 
         public BracketHandlerCommand(string expression)
         {
@@ -27,11 +29,13 @@ namespace MathNotationParser.Evaluators.MathCommandHandlers
             // Logic to handle brackets in the expression
             // This will involve finding the innermost brackets and evaluating them first
             int openBracketIndex = Expression.LastIndexOf('(');
+            ReplacementStartIndex = openBracketIndex; // Store the index for replacement later
             if (openBracketIndex == -1)
             {
                 throw new InvalidOperationException("Mismatched brackets in expression.");
             }
-            int closeBracketIndex = Expression.IndexOf(')', openBracketIndex); 
+            int closeBracketIndex = Expression.IndexOf(')', openBracketIndex);
+            ReplacementEndIndex = closeBracketIndex; // Store the index for replacement later
 
             if (closeBracketIndex == -1)
             {
