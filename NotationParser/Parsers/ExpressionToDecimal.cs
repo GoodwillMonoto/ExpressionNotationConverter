@@ -1,4 +1,5 @@
-﻿using MathNotationParser.Interpreters;
+﻿using MathNotationParser.Evaluators.MathCommandHandlers;
+using MathNotationParser.Interpreters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -72,19 +73,19 @@ namespace MathNotationParser.Parsers
                         break;
                     case '*':
 
-                        tokens[currentOperatorIndex - 1] = new DivisionExpression(new NumberExpression(currentLeftDecimal), new NumberExpression(currentRightDecimal)).Evaluate().ToString();
+                        tokens[currentOperatorIndex - 1] = new MultiplicationExpression(new NumberExpression(currentLeftDecimal), new NumberExpression(currentRightDecimal)).Evaluate().ToString();
                         tokens = tokens.Where((_, index) => index != currentOperatorIndex && index != currentOperatorIndex + 1).ToArray();
 
                         break;
                     case '+':
 
-                        tokens[currentOperatorIndex - 1] = new DivisionExpression(new NumberExpression(currentLeftDecimal), new NumberExpression(currentRightDecimal)).Evaluate().ToString();
+                        tokens[currentOperatorIndex - 1] = new AdditionExpression(new NumberExpression(currentLeftDecimal), new NumberExpression(currentRightDecimal)).Evaluate().ToString();
                         tokens = tokens.Where((_, index) => index != currentOperatorIndex && index != currentOperatorIndex + 1).ToArray();
 
                         break;
                     case '-':
 
-                        tokens[currentOperatorIndex - 1] = new DivisionExpression(new NumberExpression(currentLeftDecimal), new NumberExpression(currentRightDecimal)).Evaluate().ToString();
+                        tokens[currentOperatorIndex - 1] = new SubtractionExpression(new NumberExpression(currentLeftDecimal), new NumberExpression(currentRightDecimal)).Evaluate().ToString();
                         tokens = tokens.Where((_, index) => index != currentOperatorIndex && index != currentOperatorIndex + 1).ToArray();
 
                         break;
