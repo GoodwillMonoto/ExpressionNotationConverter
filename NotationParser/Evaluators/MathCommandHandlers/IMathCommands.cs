@@ -9,6 +9,6 @@ namespace MathNotationParser.Evaluators.MathCommandHandlers
 {
     public interface IMathCommandHandler
     {
-        public void Handle(string expression);
+        public void Handle();
     }
 }

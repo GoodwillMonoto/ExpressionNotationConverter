@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MathNotationParser.Parsers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -15,13 +16,13 @@ namespace MathNotationParser.Evaluators.MathCommandHandlers
 
         private string InnerExpression;
 
-        public string ReplacedExpression;
+        public string ExpressionToReplace;
 
         public BracketHandlerCommand(string expression)
         {
             Expression = expression;
         }
-        public void Handle(string expression)
+        public void Handle()
         {
             // Logic to handle brackets in the expression
             // This will involve finding the innermost brackets and evaluating them first
@@ -30,18 +31,20 @@ namespace MathNotationParser.Evaluators.MathCommandHandlers
             {
                 throw new InvalidOperationException("Mismatched brackets in expression.");
             }
-            int closeBracketIndex = Expression.IndexOf(')', openBracketIndex);
+            int closeBracketIndex = Expression.IndexOf(')', openBracketIndex); 
 
             if (closeBracketIndex == -1)
             {
                 throw new InvalidOperationException("Mismatched brackets in expression.");
             }
 
-            string replacedExpression = Expression.Substring(openBracketIndex, closeBracketIndex);
+            string ExpressionToReplace = Expression.Substring(openBracketIndex, closeBracketIndex);
             string innerExpression = Expression.Substring(openBracketIndex + 1, closeBracketIndex - openBracketIndex - 1);
+
+            Evaluate();
         }
 
-        public double Evaluate()
+        private void Evaluate()
         {
             // Logic to evaluate the inner expression
             // This could involve parsing the inner expression and calculating its value
@@ -57,14 +60,7 @@ namespace MathNotationParser.Evaluators.MathCommandHandlers
                 throw new InvalidOperationException("Inner expression is empty.");
             }
 
-            if (expressionParts.Length == 3)
-            {
-                var leftSideValue = expressionParts[0];
-                var operatorSymbol = expressionParts[1];
-                var rightSideValue = expressionParts[2];
-            }
-
-            return 0.0; // Replace with actual evaluation result
+            ResultValue = new InfixToDecimalParser().ToDecimal(InnerExpression);
         }
 
 

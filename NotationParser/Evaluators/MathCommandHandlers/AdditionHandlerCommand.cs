@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MathNotationParser.Parsers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,11 +13,39 @@ namespace MathNotationParser.Evaluators.MathCommandHandlers
 
         public string Expression;
 
-        public string ReplacedExpression;
+        private string InnerExpression;
 
-        public void Handle(string expression)
+        public string ExpressionToReplace;
+
+
+        public AdditionHandlerCommand(string expression)
         {
+            Expression = expression;
+        }
 
+        public void Handle()
+        {
+            InnerExpression = Expression;
+            Evaluate();
+        }
+
+        private void Evaluate()
+        {
+            // Logic to evaluate the inner expression
+            // This could involve parsing the inner expression and calculating its value
+            // For now, we will just return a placeholder value
+            if (string.IsNullOrEmpty(InnerExpression))
+            {
+                throw new InvalidOperationException("Inner expression is empty.");
+            }
+            var expressionParts = InnerExpression.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
+            if (expressionParts.Length == 0)
+            {
+                throw new InvalidOperationException("Inner expression is empty.");
+            }
+
+            ResultValue = new InfixToDecimalParser().ToDecimal(InnerExpression);
         }
     }
 }
