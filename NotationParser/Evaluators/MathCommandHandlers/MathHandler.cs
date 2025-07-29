@@ -20,17 +20,22 @@ namespace MathNotationParser.Evaluators.MathCommandHandlers
         public virtual void Handle()
         {
             int leftNumberStart = Expression.Substring(0,OperatorIndex - 1).LastIndexOf(' ', 0);
-            int rightNumberEnd = Expression.IndexOf(' ', OperatorIndex + 1);
+            int rightNumberEnd = Expression.IndexOf(' ', OperatorIndex + 2);
 
             if (leftNumberStart == - 1)
             {
                 leftNumberStart = 0; // Start from the beginning if no space found
             }
 
-            ReplacementStartIndex = leftNumberStart;
-            ReplacementEndIndex = rightNumberEnd == -1 ? Expression.Length : rightNumberEnd + 1;
+            if (rightNumberEnd == -1)
+            {
+                rightNumberEnd = Expression.Length - 1; // End at the last character if no space found
+            }
 
-            InnerExpression = Expression.Substring(ReplacementStartIndex , ReplacementEndIndex - ReplacementStartIndex).Trim();
+            ReplacementStartIndex = leftNumberStart;
+            ReplacementEndIndex = rightNumberEnd;
+
+            InnerExpression = Expression.Substring(ReplacementStartIndex , ReplacementEndIndex + 1 - ReplacementStartIndex).Trim();
 
             Evaluate();
 

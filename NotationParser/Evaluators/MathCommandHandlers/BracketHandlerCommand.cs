@@ -32,8 +32,8 @@ namespace MathNotationParser.Evaluators.MathCommandHandlers
                 throw new InvalidOperationException("Mismatched brackets in expression.");
             }
 
-            string ExpressionToReplace = Expression.Substring(openBracketIndex, closeBracketIndex);
-            InnerExpression = Expression.Substring(openBracketIndex + 1, closeBracketIndex - openBracketIndex - 1);
+            string ExpressionToReplace = Expression.Substring(openBracketIndex, closeBracketIndex + 1 - openBracketIndex);
+            InnerExpression = Expression.Substring(openBracketIndex + 1, closeBracketIndex - 1 - openBracketIndex);
 
             Evaluate();
 
