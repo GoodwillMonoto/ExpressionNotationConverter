@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,7 +11,7 @@ namespace MathNotationParser.Evaluators
     public class InfixEvaluator : INotationEvaluator
     {
         public string Expression;
-        public double Result { get; private set; }
+        public decimal Result { get; private set; }
 
         protected IReadOnlyDictionary<char, MathOperator> operators = new Dictionary<char, MathOperator>
         {
@@ -21,12 +22,17 @@ namespace MathNotationParser.Evaluators
             { '(', new MathOperator('(', 4) }
         };
 
-        public InfixEvaluator(string expression)
+        public InfixEvaluator()
+        {
+
+        }
+
+        public void SetExpression(string expression)
         {
             Expression = expression;
         }
 
-        public double Evaluate()
+        public Decimal Evaluate()
         {
             while (ExpressionContainsOperators())
             {
@@ -57,6 +63,13 @@ namespace MathNotationParser.Evaluators
                 }
             }
 
+            if (!decimal.TryParse(Expression, out var result))
+            {
+                throw new InvalidOperationException("Failed to parse the final result from the expression.");
+            }
+
+            Result = result;
+
             return Result;
         }
 
@@ -76,31 +89,36 @@ namespace MathNotationParser.Evaluators
         {
           var bracketHandler = new BracketHandlerCommand(expression: Expression);
           bracketHandler.Handle();
-          
+          Expression = bracketHandler.ResultExpression;
+
         }
 
         private void HandleDivision()
         {
             var divisionHandler = new DivisionHandlerCommand(expression: Expression);
             divisionHandler.Handle();
+            Expression = divisionHandler.ResultExpression;
         }
 
         private void HandleMultiplication()
         {
             var multiplicationHandler = new MultiplicationHandlerCommand(expression: Expression);
             multiplicationHandler.Handle();
+            Expression = multiplicationHandler.ResultExpression;
         }
 
         private void HandleAddition()
         {
             var additionHandler = new AdditionHandlerCommand(expression: Expression);
             additionHandler.Handle();
+            Expression = additionHandler.ResultExpression;
         }
 
         private void HandleSubtraction()
         {
             var subtractionHandler = new SubtractionHandlerCommand(expression: Expression);
             subtractionHandler.Handle();
+            Expression = subtractionHandler.ResultExpression;
         }
     }
 }

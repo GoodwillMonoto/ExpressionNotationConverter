@@ -8,6 +8,7 @@ namespace MathNotationParser.Evaluators
 {
     public interface INotationEvaluator
     {
-        double Evaluate();
+        public void SetExpression(string expression);
+        public Decimal Evaluate();
     }
 }
