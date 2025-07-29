@@ -15,6 +15,12 @@ namespace MathNotationParser.NotationParsers
         public string EvaluationString;
         public string Input;
         public string Output;
+
+        public PostfixToInfixParser(INotationEvaluator notationEvaluator)
+        {
+            this.notationEvaluator = notationEvaluator;
+        }
+
         protected override void Parse(string rpnstring)
         {
             Input = rpnstring;
@@ -54,12 +60,20 @@ namespace MathNotationParser.NotationParsers
 
         public string ToInfix(string rpnstring)
         {
+            Parse(rpnstring);
             return Output;
         }
 
-        public double Evaluate()
+        public Decimal Evaluate()
         {
-            notationEvaluator = new InfixEvaluator(EvaluationString);
+
+            EvaluationString = notationEvaluator switch
+            {
+                InfixEvaluator infixEvaluator => Output is null ? ToInfix(Input) : Output,
+                _ => throw new InvalidOperationException("Unsupported notation evaluator type.")
+            };
+
+            notationEvaluator.SetExpression(EvaluationString);
             return notationEvaluator.Evaluate();
         }
     }

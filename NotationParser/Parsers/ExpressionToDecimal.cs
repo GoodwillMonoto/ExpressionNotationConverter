@@ -36,7 +36,7 @@ namespace MathNotationParser.Parsers
 
             
 
-            while(TokensContainOperators())
+            while(TokensContainOperators(tokens))
             {
                 var currentOperator = OperationsCount == 0 ? 
                                         initialOperator :
@@ -99,9 +99,9 @@ namespace MathNotationParser.Parsers
 
         }
 
-        private bool TokensContainOperators()
+        private bool TokensContainOperators(string[] tokens)
         {
-            throw new NotImplementedException();
+           return tokens.Where(op => operators.ContainsKey(op[0])).Any();
         }
 
         public Decimal ToDecimal(string expression)
