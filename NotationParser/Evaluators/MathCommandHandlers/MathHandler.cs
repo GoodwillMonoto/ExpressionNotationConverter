@@ -29,17 +29,17 @@ namespace MathNotationParser.Evaluators.MathCommandHandlers
 
             if (rightNumberEnd == -1)
             {
-                rightNumberEnd = Expression.Length - 1; // End at the last character if no space found
+                rightNumberEnd = Expression.Length; // End at the last character if no space found
             }
 
             ReplacementStartIndex = leftNumberStart;
             ReplacementEndIndex = rightNumberEnd;
 
-            InnerExpression = Expression.Substring(ReplacementStartIndex , ReplacementEndIndex + 1 - ReplacementStartIndex).Trim();
+            InnerExpression = Expression.Substring(ReplacementStartIndex , ReplacementEndIndex - ReplacementStartIndex);
 
             Evaluate();
 
-            ResultExpression = $"{Expression.Substring(0, ReplacementStartIndex)}{ResultValue}{Expression.Substring(ReplacementEndIndex + 1)}";
+            ResultExpression = $"{Expression.Substring(0, ReplacementStartIndex)}{ResultValue}{Expression.Substring(ReplacementEndIndex)}";
         }
 
         protected virtual void Evaluate()
