@@ -19,12 +19,17 @@ namespace MathNotationParser.Evaluators.MathCommandHandlers
         public int OperatorIndex;
         public virtual void Handle()
         {
-            int leftNumberStart = Expression.Substring(0,OperatorIndex - 1).LastIndexOf(' ', 0);
+            int leftNumberStart = Expression.Substring(0,OperatorIndex - 1).LastIndexOf(' ');
             int rightNumberEnd = Expression.IndexOf(' ', OperatorIndex + 2);
 
             if (leftNumberStart == - 1)
             {
                 leftNumberStart = 0; // Start from the beginning if no space found
+            }
+             
+            if(Expression[leftNumberStart] == ' ')
+            {
+                leftNumberStart++; // Move to the next character if the space is found
             }
 
             if (rightNumberEnd == -1)
