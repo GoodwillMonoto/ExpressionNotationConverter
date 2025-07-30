@@ -18,6 +18,10 @@ Console.WriteLine("Evaluated result:");
 Console.WriteLine(parser.Evaluate());
 Console.WriteLine("Press any key to exit...");
 Console.ReadLine();
+Console.WriteLine("Evaluation steps:");
+parser.EvaluatePrintSteps();
+Console.WriteLine("Press any key to exit...");
+Console.ReadLine();
 
 
 

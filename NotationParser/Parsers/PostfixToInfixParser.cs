@@ -76,6 +76,12 @@ namespace MathNotationParser.NotationParsers
             notationEvaluator.SetExpression(EvaluationString);
             return notationEvaluator.Evaluate();
         }
+
+        public void EvaluatePrintSteps()
+        {
+            notationEvaluator.PrintEvaluationSteps();
+        }
+
     }
 
 }

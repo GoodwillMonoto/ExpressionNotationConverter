@@ -10,5 +10,6 @@ namespace MathNotationParser.Evaluators
     {
         public void SetExpression(string expression);
         public Decimal Evaluate();
+        public void PrintEvaluationSteps();
     }
 }

@@ -21,10 +21,11 @@ namespace MathNotationParser.Evaluators
             { '*', new MathOperator('*', 3) },
             { '(', new MathOperator('(', 4) }
         };
+        public List<MathHandler> handlers;
 
         public InfixEvaluator()
         {
-
+            handlers = new List<MathHandler>();
         }
 
         public void SetExpression(string expression)
@@ -90,6 +91,7 @@ namespace MathNotationParser.Evaluators
           var bracketHandler = new BracketHandlerCommand(expression: Expression);
           bracketHandler.Handle();
           Expression = bracketHandler.ResultExpression;
+          handlers.Add(bracketHandler);
 
         }
 
@@ -98,6 +100,7 @@ namespace MathNotationParser.Evaluators
             var divisionHandler = new DivisionHandlerCommand(expression: Expression);
             divisionHandler.Handle();
             Expression = divisionHandler.ResultExpression;
+            handlers.Add(divisionHandler);
         }
 
         private void HandleMultiplication()
@@ -105,6 +108,7 @@ namespace MathNotationParser.Evaluators
             var multiplicationHandler = new MultiplicationHandlerCommand(expression: Expression);
             multiplicationHandler.Handle();
             Expression = multiplicationHandler.ResultExpression;
+            handlers.Add(multiplicationHandler);
         }
 
         private void HandleAddition()
@@ -112,6 +116,7 @@ namespace MathNotationParser.Evaluators
             var additionHandler = new AdditionHandlerCommand(expression: Expression);
             additionHandler.Handle();
             Expression = additionHandler.ResultExpression;
+            handlers.Add(additionHandler);
         }
 
         private void HandleSubtraction()
@@ -119,6 +124,17 @@ namespace MathNotationParser.Evaluators
             var subtractionHandler = new SubtractionHandlerCommand(expression: Expression);
             subtractionHandler.Handle();
             Expression = subtractionHandler.ResultExpression;
+            handlers.Add(subtractionHandler);
+        }
+
+        public void PrintEvaluationSteps()
+        {
+            var count = 1;
+            foreach (var handler in handlers)
+            {
+                Console.WriteLine($"Step {count}: {handler.Expression}");
+                count++;
+            }
         }
     }
 }
