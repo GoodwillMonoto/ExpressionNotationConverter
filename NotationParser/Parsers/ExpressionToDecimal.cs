@@ -47,7 +47,7 @@ namespace MathNotationParser.Parsers
 
                 var currentOperatorIndex = OperationsCount == 0 ?
                                             initialOperatorIndex :
-                                            Array.IndexOf(tokens, initialOperator.Key.ToString());
+                                            Array.IndexOf(tokens, currentOperator.Key.ToString());
 
 
                 decimal currentLeftDecimal;
